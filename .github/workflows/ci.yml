@@ -1,0 +1,22 @@
+name: Belfry CI Scan
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  belfry-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print commit SHA
+        run: echo "Commit SHA - ${{ github.sha }}"
+      - name: Trigger Belfry webhook
+        run: |
+          echo "Triggering Belfry scan for tenant-video-test"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+      - name: Simulate CI scan trigger
+        run: echo "Belfry static scan initiated"
